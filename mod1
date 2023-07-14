@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
+
+contract Error {
+
+    uint force = 100;
+    address owner;
+
+    constructor() {
+        
+        owner = msg.sender;
+    }
+
+    function Weight(uint _mass) public view returns (uint) {
+        require(owner == msg.sender ,"You can't open this file");// checking the condition before execution
+
+        assert(_mass > 0);//check for invariants
+
+        if ((_mass * force) < 0){
+
+            revert("Weight of a body can never be zero");//if false stop execution and go back to initial state
+        }
+
+        return _mass * force;
+    }
+}
